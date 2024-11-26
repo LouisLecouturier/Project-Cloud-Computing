@@ -2,7 +2,7 @@ FROM python:3.12-slim AS dependencies
 
 WORKDIR /app
 
-COPY ./pyproject.toml ./poetry.lock /app/
+COPY pyproject.toml poetry.lock /app/
 
 # Install Poetry
 RUN pip install poetry --quiet
