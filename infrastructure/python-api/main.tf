@@ -28,18 +28,14 @@ resource "azurerm_linux_web_app" "fastapi-app" {
   service_plan_id     = azurerm_service_plan.fastapi-plan.id
 
   site_config {
-    application_stack {
-      python_version = "3.9"
-    }
-
-    always_on = false
-
-    app_command_line = "gunicorn -w 4 -k uvicorn.workers.UvicornWorker app:app --bind 0.0.0.0:8000"
+    always_on        = false
   }
 
-  app_settings = {
-    PYTHON_ENABLE_GUNICORN         = "1"
-    SCM_DO_BUILD_DURING_DEPLOYMENT = "true"
+ app_settings = {
+    WEBSITES_PORT = "8000" # Port exposé par votre application
+    PYTHON_ENABLE_GUNICORN = "1"
+    DOCKER_REGISTRY_SERVER_URL = "https://ghcr.io"
+    DOCKER_CUSTOM_IMAGE_NAME = "ghcr.io/louislecouturier/project-cloud-computing:latest"
   }
 
   timeouts {
