@@ -1,12 +1,4 @@
-DO $$
-BEGIN
-    IF NOT EXISTS (SELECT 1 FROM pg_database WHERE datname = 'simple_shop') THEN
-        PERFORM dblink_exec('dbname=postgres', 'CREATE DATABASE simple_shop');
-    END IF;
-END
-$$;
 
-\c simple_shop;
 
 CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
@@ -33,21 +25,20 @@ CREATE TABLE IF NOT EXISTS baskets (
 INSERT INTO users (username, email)
 VALUES 
     ('john_doe', 'john@example.com'),
-    ('jane_smith', 'jane@example.com')
-ON CONFLICT (username, email) DO NOTHING;
+    ('jane_smith', 'jane@example.com');
+
 
 INSERT INTO items (name, description, price)
 VALUES 
     ('T-shirt Basic', 'T-shirt en coton uni', 19.99),
     ('Chaussures de sport', 'Baskets confortables', 79.99),
     ('Casque audio', 'Casque bluetooth avec réduction de bruit', 149.99),
-    ('Livre de développement', 'Guide complet de programmation', 39.99)
-ON CONFLICT DO NOTHING;
+    ('Livre de développement', 'Guide complet de programmation', 39.99);
+
 
 INSERT INTO baskets (user_id, item_id, quantity)
 VALUES 
     (1, 1, 2),
     (1, 3, 1),
     (2, 2, 1),
-    (2, 4, 3)
-ON CONFLICT DO NOTHING;
+    (2, 4, 3);
