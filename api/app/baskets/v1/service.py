@@ -1,10 +1,17 @@
-class BasketService:
+from database.utils.db import DatabaseConnection
 
+class BasketService:
     def __init__(self):
-        pass
+        self.db_connection = DatabaseConnection()
 
     def get_from_user(self, id: int):
-        return "User's basket"
+        with self.db_connection.get_cursor() as cursor:
+            cursor.execute("SELECT * FROM baskets WHERE user_id = %s", (id,))
+            basket = cursor.fetchone()
+        return {"user_id": id, "basket": basket}
 
     def get_all_baskets(self):
-        return "All baskets"
+        with self.db_connection.get_cursor() as cursor:
+            cursor.execute("SELECT * FROM baskets")
+            baskets = cursor.fetchall()
+        return {"baskets": baskets}
