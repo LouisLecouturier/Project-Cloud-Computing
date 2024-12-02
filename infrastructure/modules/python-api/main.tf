@@ -1,10 +1,9 @@
-
 resource "azurerm_service_plan" "fastapi-plan" {
   name                = "pythonapp-plan"
   resource_group_name = var.rg_name
   location            = var.location
   os_type             = "Linux"
-  sku_name            = "F1"
+  sku_name            = "B1"
 }
 
 resource "random_string" "webapp_name" {
@@ -39,6 +38,10 @@ resource "azurerm_linux_web_app" "fastapi-app" {
 
   app_settings = {
     SCM_DO_BUILD_DURING_DEPLOYMENT = "true"
+    DATABASE_HOST                  = var.pg_host
+    DATABASE_NAME                  = var.pg_database
+    DATABASE_USER                  = var.pg_admin_username
+    DATABASE_PASSWORD              = var.pg_admin_password
   }
 
   timeouts {

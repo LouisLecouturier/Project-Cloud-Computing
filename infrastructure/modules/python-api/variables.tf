@@ -1,9 +1,3 @@
-variable "pg_account_name" {
-  type        = string
-  default     = "pgaccount"
-  description = "Account used for the db."
-}
-
 variable "rg_name" {
   type        = string
   default     = null
@@ -15,13 +9,23 @@ variable "location" {
   description = "The location/region where the resource group is created."
 }
 
+
 variable "pg_admin_username" {
+  description = "PostgreSQL admin username"
   type        = string
-  description = "Username for the PostgreSQL admin"
 }
 
 variable "pg_admin_password" {
+  description = "PostgreSQL admin password"
   type        = string
-  description = "Password for the PostgreSQL admin"
-  sensitive   = true
+}
+
+variable "pg_host" {
+  description = "PostgreSQL host"
+  type        = string
+}
+
+variable "pg_database" {
+  description = "PostgreSQL database name"
+  type        = string
 }
