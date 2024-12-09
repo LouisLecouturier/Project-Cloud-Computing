@@ -1,23 +1,19 @@
-class UserService:
+from database.utils.db import DatabaseConnection
 
+class UserService:
     def __init__(self):
-        pass
+        self.db_connection = DatabaseConnection()
+        
+        print("USER Service...")
 
     def get_user(self, id: int):
-        """Get user by id.
-
-        Args:
-            id (int): user id
-
-        Returns:
-            dict: user data
-        """
-        return "User"
+        with self.db_connection.get_cursor() as cursor:
+            cursor.execute("SELECT * FROM users WHERE id = %s", (id,))
+            user = cursor.fetchone()
+        return {"user_id": id, "user": user}
 
     def get_all_users(self):
-        """Get all users.
-
-        Returns:
-            list: list of users
-        """
-        return "All users"
+        with self.db_connection.get_cursor() as cursor:
+            cursor.execute("SELECT * FROM users")
+            users = cursor.fetchall()
+        return {"users": users}

@@ -1,23 +1,19 @@
-class ItemService:
+from database.utils.db import DatabaseConnection
 
+class ItemService:
     def __init__(self):
-        pass
+        self.db_connection = DatabaseConnection()
+        
+        print("ITEMS Service...")
 
     def get_item(self, id: int):
-        """Get item by id.
-
-        Args:
-            id (int): item id
-
-        Returns:
-            dict: item data
-        """
-        return "Item"
+        with self.db_connection.get_cursor() as cursor:
+            cursor.execute("SELECT * FROM items WHERE id = %s", (id,))
+            item = cursor.fetchone()
+        return {"user_id": id, "item": item}
 
     def get_all_items(self):
-        """Get all items.
-
-        Returns:
-            list: list of items
-        """
-        return "All items"
+        with self.db_connection.get_cursor() as cursor:
+            cursor.execute("SELECT * FROM items")
+            items = cursor.fetchall()
+        return {"items": items}
