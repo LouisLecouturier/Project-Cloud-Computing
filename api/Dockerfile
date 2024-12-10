@@ -29,4 +29,9 @@ EXPOSE 8000
 
 
 # Command to run the FastAPI app
-CMD ["poetry", "run", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["poetry", "run", "gunicorn", "main:app", \
+     "--workers", "4", \
+     "--worker-class", "uvicorn.workers.UvicornWorker", \
+     "--bind", "0.0.0.0:8000", \
+     "--log-level", "info", \
+     "--timeout", "120"]
