@@ -2,6 +2,7 @@ FROM python:3.12-slim AS dependencies
 
 ENV PYTHONUNBUFFERED=1
 ENV PORT=8000
+ENV PYTHONPATH=/app
 
 WORKDIR /app
 
