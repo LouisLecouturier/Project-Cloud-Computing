@@ -1,7 +1,6 @@
 FROM python:3.12-slim AS dependencies
 
 ENV PYTHONUNBUFFERED=1
-ENV PYTHONPATH=/app/src
 ENV PORT=8000
 
 WORKDIR /app
@@ -37,7 +36,7 @@ HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
 EXPOSE 8000
 
 # Command to run the FastAPI app
-CMD ["poetry", "run", "gunicorn", "src.main:app", \
+CMD ["poetry", "run", "gunicorn", "main:app", \
      "--workers", "4", \
      "--worker-class", "uvicorn.workers.UvicornWorker", \
      "--bind", "0.0.0.0:8000", \
