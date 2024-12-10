@@ -23,9 +23,6 @@ WORKDIR /app
 # Copy the dependencies from the previous stage
 COPY --from=dependencies /app /app
 
-# Set PYTHONPATH to include the src directory
-ENV PYTHONPATH=/app/src
-
 # Copy the rest of the application code
 COPY . /app
 
