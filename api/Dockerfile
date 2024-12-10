@@ -1,5 +1,9 @@
 FROM python:3.12-slim AS dependencies
 
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONPATH=/app/src
+ENV PORT=8000
+
 WORKDIR /app
 
 COPY pyproject.toml poetry.lock /app/
