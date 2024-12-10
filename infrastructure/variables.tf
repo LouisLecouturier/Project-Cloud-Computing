@@ -4,6 +4,11 @@ variable "rg_location" {
   description = "Location of the resource group"
 }
 
+variable "pg_host" {
+  type        = string
+  default     = "0.0.0.0"
+  description = "Host of the PostgreSQL database"
+}
 
 variable "pg_database" {
   type        = string

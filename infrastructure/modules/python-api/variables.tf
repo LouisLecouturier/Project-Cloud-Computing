@@ -22,10 +22,12 @@ variable "pg_admin_password" {
 
 variable "pg_host" {
   description = "PostgreSQL host"
+  default     = "0.0.0.0"
   type        = string
 }
 
 variable "pg_database" {
   description = "PostgreSQL database name"
+  default     = "postgres"
   type        = string
 }
