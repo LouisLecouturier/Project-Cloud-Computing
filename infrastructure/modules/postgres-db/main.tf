@@ -44,6 +44,14 @@ resource "azurerm_postgresql_flexible_server" "projet_cloud_pg_server" {
 
 }
 
+# Add this after your azurerm_postgresql_flexible_server resource
+resource "azurerm_postgresql_flexible_server_firewall_rule" "allow_azure_services" {
+  server_id = azurerm_postgresql_flexible_server.projet_cloud_pg_server.id
+  name      = "allow-azure-services"
+
+  start_ip_address = "0.0.0.0"
+  end_ip_address   = "255.255.255.255"
+}
 
 resource "azurerm_postgresql_flexible_server_database" "pg_db" {
   name = var.pg_database
