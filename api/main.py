@@ -1,6 +1,6 @@
-from fastapi import FastAPI
-
 from app.router import router
+from database.utils.db import DatabaseConnection
+from fastapi import FastAPI
 
 from database.utils.db import DatabaseConnection
 
@@ -15,12 +15,28 @@ def read_root():
     return {"message": "Hello World"}
 
 
+@app.get("/")
+def read_root():
+    return {"message": "Hello World"}
+
+
+@app.get("/health")
+async def health_check():
+    return {"status": "healthy"}
+
+
 if __name__ == "__main__":
     import uvicorn
     
     # Drop all the db (don't use in prod, only for demo)
     db_connection.execute(open("./database/scripts/clear.sql", "r").read())
     
+    # Seed db
+    db_connection.execute(open("./database/scripts/init.sql", "r").read())
+
+    # Drop all the db (don't use in prod, only for demo)
+    db_connection.execute(open("./database/scripts/clear.sql", "r").read())
+
     # Seed db
     db_connection.execute(open("./database/scripts/init.sql", "r").read())
 
