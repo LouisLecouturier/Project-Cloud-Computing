@@ -27,6 +27,7 @@ module "python-api" {
 
   pg_host           = module.postgres-db.db_host
   pg_database       = var.pg_database
+  pg_port           = var.pg_port
   pg_admin_username = var.pg_admin_username
   pg_admin_password = var.pg_admin_password
 

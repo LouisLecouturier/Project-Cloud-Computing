@@ -36,6 +36,7 @@ resource "azurerm_linux_web_app" "fastapi-app" {
     DOCKER_REGISTRY_SERVER_URL = "https://ghcr.io"
     DOCKER_CUSTOM_IMAGE_NAME   = "ghcr.io/louislecouturier/project-cloud-computing:latest"
     DATABASE_HOST              = var.pg_host
+    DATABASE_PORT              = var.pg_port
     DATABASE_NAME              = var.pg_database
     DATABASE_USER              = var.pg_admin_username
     DATABASE_PASSWORD          = var.pg_admin_password

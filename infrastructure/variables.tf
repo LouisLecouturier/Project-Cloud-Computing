@@ -10,6 +10,12 @@ variable "pg_host" {
   description = "Host of the PostgreSQL database"
 }
 
+variable "pg_port" {
+  type        = number
+  default     = 5432
+  description = "Port of the PostgreSQL database"
+}
+
 variable "pg_database" {
   type        = string
   default     = "postgres"
