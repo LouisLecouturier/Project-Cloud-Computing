@@ -66,10 +66,13 @@ jobs:
 
             - name: Install dependencies
               if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
-              run: poetry install --no-interaction
+              run: |
+                  cd api
+                  poetry install --no-interaction
 
             - name: Run tests
               run: |
+                  cd api
                   source .venv/bin/activate
                   poetry run pytest tests/
 
