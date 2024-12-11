@@ -65,6 +65,13 @@ jobs:
               with:
                   python-version: "3.12"
 
+            - name: Wait for PostgreSQL to be ready
+              run: |
+                  until pg_isready -h localhost -p 5432; do
+                      echo "Waiting for PostgreSQL to be ready..."
+                      sleep 1
+                  done
+
             - name: Install Poetry
               uses: snok/install-poetry@v1
               with:
