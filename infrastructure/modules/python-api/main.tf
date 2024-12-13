@@ -26,9 +26,9 @@ resource "azurerm_linux_web_app" "fastapi-app" {
   location            = var.location
   service_plan_id     = azurerm_service_plan.fastapi-plan.id
 
-  site_config {
-    always_on = false
-  }
+  public_network_access_enabled = true
+  virtual_network_subnet_id     = var.app_subnet_id
+
 
   app_settings = {
     WEBSITES_PORT              = "8000" # Port exposé par votre application
@@ -40,6 +40,14 @@ resource "azurerm_linux_web_app" "fastapi-app" {
     DATABASE_NAME              = var.pg_database
     DATABASE_USER              = var.pg_admin_username
     DATABASE_PASSWORD          = var.pg_admin_password
+  }
+
+  site_config {
+    always_on = false
+  }
+
+  identity {
+    type = "SystemAssigned"
   }
 
   timeouts {

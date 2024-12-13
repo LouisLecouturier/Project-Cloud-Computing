@@ -35,3 +35,13 @@ variable "pg_database" {
   default     = "postgres"
   type        = string
 }
+
+variable "vnet_id" {
+  description = "ID of the virtual network"
+  type        = string
+}
+
+variable "app_subnet_id" {
+  description = "ID of the app subnet"
+  type        = string
+}

@@ -26,9 +26,19 @@ variable "pg_admin_password" {
   sensitive   = true
 }
 
-
 variable "pg_database" {
   type        = string
   description = "Name of the PostgreSQL database"
 
+}
+
+
+variable "vnet_id" {
+  type        = string
+  description = "ID of the virtual network"
+}
+
+variable "db_subnet" {
+  type        = string
+  description = "ID of the database subnet"
 }

@@ -3,6 +3,14 @@ resource "azurerm_resource_group" "rg" {
   location = var.rg_location
 }
 
+module "networks" {
+  source = "./modules/networks"
+
+  rg_name  = azurerm_resource_group.rg.name
+  location = azurerm_resource_group.rg.location
+
+}
+
 
 module "postgres-db" {
   source   = "./modules/postgres-db"
@@ -13,6 +21,8 @@ module "postgres-db" {
   pg_admin_username = var.pg_admin_username
   pg_admin_password = var.pg_admin_password
 
+  vnet_id   = module.networks.vnet_id
+  db_subnet = module.networks.database_subnet_id
 
   depends_on = [azurerm_resource_group.rg]
 
@@ -30,6 +40,9 @@ module "python-api" {
   pg_port           = var.pg_port
   pg_admin_username = var.pg_admin_username
   pg_admin_password = var.pg_admin_password
+
+  vnet_id       = module.networks.vnet_id
+  app_subnet_id = module.networks.app_subnet_id
 
   depends_on = [azurerm_resource_group.rg]
 }
