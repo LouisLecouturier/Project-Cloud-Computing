@@ -17,6 +17,12 @@ This project consists of a FastAPI application in Python with a PostgreSQL datab
 
 ### Initialization
 
+Go to the infrastructure directory:
+
+```bash
+cd infrastructure
+```
+
 #### Terraform
 
 Initialize Terraform:
@@ -42,6 +48,12 @@ terraform apply -var-file="secrets.tfvars"
 ```
 
 ### Installation
+
+Go to the api directory:
+
+```bash
+cd api
+```
 
 Install the dependencies using Poetry:
 
@@ -85,8 +97,14 @@ The application uses a PostgreSQL database. Ensure that the database is running 
 
 ## Testing
 
+Go to the api directory:
+
+```bash
+cd api
+```
+
 Run the tests using Poetry:
 
 ```bash
-poetry run pytest
+poetry run pytest tests/
 ```
